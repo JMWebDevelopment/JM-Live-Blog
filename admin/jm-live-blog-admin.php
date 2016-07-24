@@ -7,7 +7,7 @@
  * @package Sports Bench
  * @author Jacob Martella
  * @since 1.0
- * @version 1.0
+ * @version 1.0.1
  */
 //* Set the array for the color scheme dropdown
 global $color_array;
@@ -162,6 +162,13 @@ function jm_live_blog_meta_box_save($post_id) {
 	}
 
 	for ( $i = 0; $i < $num; $i++ ) {
+		if ( $content[$i] == '' or $content[$i] == null ) {
+			unset( $content[$i] );
+			$content = array_values( $content );
+		}
+	}
+
+	for ( $i = 0; $i < $num; $i++ ) {
 
 		if ( ( isset($title[$i]) && $title[$i] != '' ) ) {
 
@@ -173,16 +180,8 @@ function jm_live_blog_meta_box_save($post_id) {
 				$new[$i]['live_blog_updates_time'] = wp_filter_nohtml_kses($time[$i]);
 			}
 
-			if(isset($content[$i]) and $content[$i] != '' ) {
-				$new[$i]['live_blog_updates_content'] = $content[$i];
-			} else {
-				if ( !isset($j) ) {
-					$j = $i + 1;
-				} else {
-					$j = $j + 1;
-				}
-				$new[$i]['live_blog_updates_content'] = wp_kses_post( $content[$j] );
-			}
+			$new[$i]['live_blog_updates_content'] = $content[$i];
+
 		}
 
 	}

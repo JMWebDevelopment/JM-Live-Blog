@@ -3,7 +3,7 @@
 Plugin Name: JM Live Blog
 Plugin URI:  http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Description: Live blogs are the essential tool for keeping readers up to date in any breaking news situation or sporting event. Using the power of AJAX, JM Live Blog allows you to add a live blog to any post with a simple shortcode to keep your readers in the know.
-Version:     1.0
+Version:     1.0.1
 Author:      Jacob Martella
 Author URI:  http://www.jacobmartella.com
 License:     GPL3
@@ -94,13 +94,14 @@ function jm_live_blog_shortcode( $atts ) {
 	$num_update = count ( $updates );
 	if ( $updates ) {
 		foreach ( $updates as $update ) {
+			$content = apply_filters( 'the_content', $update['live_blog_updates_content'] );
 			$html .= '<div id="' . $num_update . '" class="jm-live-blog-update clearfix">';
 			$html .= '<div class="live-blog-left">';
 			$html .= '<h5 class="live-blog-time">' . $update['live_blog_updates_time'] . '</h5>';
 			$html .= '</div>';
 			$html .= '<div class="live-blog-right">';
 			$html .= '<h4 class="live-blog-title">' . $update['live_blog_updates_title'] . '</h4>';
-			$html .= '<div class="live-blog-content">' . do_shortcode( $update['live_blog_updates_content'] ) . '</div>';
+			$html .= '<div class="live-blog-content">' . $content . '</div>';
 			$html .= '</div>';
 			$html .= '</div>';
 			$num_update--;
@@ -239,13 +240,14 @@ function jm_live_blog_ajax() {
 	if ( $updates ) {
 		foreach ( $updates as $update ) {
 			if ( !in_array( $num_update, $update_ids ) ) {
+				$content = apply_filters( 'the_content', $update['live_blog_updates_content'] );
 				echo '<div id="' . $num_update . '" class="jm-live-blog-update clearfix">';
 				echo '<div class="live-blog-left">';
 				echo '<h5 class="live-blog-time">' . $update['live_blog_updates_time'] . '</h5>';
 				echo '</div>';
 				echo '<div class="live-blog-right">';
 				echo '<h4 class="live-blog-title">' . $update['live_blog_updates_title'] . '</h4>';
-				echo '<div class="live-blog-content">' . do_shortcode( $update['live_blog_updates_content'] ) . '</div>';
+				echo '<div class="live-blog-content">' . $content . '</div>';
 				echo '</div>';
 				echo '</div>';
 				$num_update --;
