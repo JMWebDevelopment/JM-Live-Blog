@@ -3,8 +3,8 @@ Contributors: ArenaPigskin
 Tags: live blog, ajax, live updates, blog
 Donate link: http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Requires at least: 4.3
-Tested up to: 4.5.3
-Stable tag: 1.0.1
+Tested up to: 4.7
+Stable tag: 1.1
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +24,10 @@ Live blogs are the essential tool for keeping readers up to date in any breaking
 3. The live blog in action inside of a post.
 
 == Changelog ==
+= 1.1 =
+- Added: Ability to customize the color of the "New Updates" alerts banner.
+- Tested with WordPress 4.7.
+
 = 1.0.1 =
 - Fixed: Issue with the latest two updates having the same content after saving without adding a new field.
 - Fixed: Issue with paragraph breaks not showing.
