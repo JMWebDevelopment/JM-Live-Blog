@@ -24,6 +24,11 @@ Live blogs are the essential tool for keeping readers up to date in any breaking
 3. The live blog in action inside of a post.
 
 == Changelog ==
+= 1.2 =
+- Fixed: Issue with posts being duplicated when hitting "New Updates" button.
+- Fixed: Titles with double quotes not showing up correctly.
+- Tested with WordPress 4.8.
+
 = 1.1 =
 - Added: Ability to customize the color of the "New Updates" alerts banner.
 - Tested with WordPress 4.7.

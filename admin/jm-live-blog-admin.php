@@ -90,7 +90,7 @@ function jm_live_blog_meta_box_display() {
 			echo '<table class="jm-live-blog-fields">';
 			echo '<tr>';
 			echo '<td><label for="live_blog_updates_title">' . __( 'Update Title', 'jm-live-blog' ) . '</label></td>';
-			echo '<td><input type="text" name="live_blog_updates_title[]" id="live_blog_updates_title" class="jm_live_blog_input" value="' . $update[ 'live_blog_updates_title' ] . '" /></td>';
+			echo '<td><input type="text" name="live_blog_updates_title[]" id="live_blog_updates_title" class="jm_live_blog_input" value="' . htmlentities( $update[ 'live_blog_updates_title' ] ) . '" /></td>';
 			echo '</tr>';
 
 			echo '<tr>';

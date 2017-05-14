@@ -4,12 +4,14 @@ jQuery( document ).ready(function( $ ) {
 
     window.setInterval( checkUpdates, 30000 );
 
+    $( '.jm-live-blog-outer .jm-live-blog-section .jm-live-blog-update' ).each( function () {
+        var updateID = this.id;
+        updateID = updateID.replace( /\D/g,'' );
+        updateIds.push( updateID );
+    } );
+    console.log('Update IDs: ' + updateIds);
+
    function checkUpdates() {
-       $( '.jm-live-blog-outer .jm-live-blog-section .jm-live-blog-update' ).map( function () {
-           var updateID = this.id;
-           updateID = updateID.replace( /\D/g,'' );
-           updateIds.push( updateID );
-       } );
        $.post({
            url : jmliveblog.url,
            data : {
@@ -23,14 +25,16 @@ jQuery( document ).ready(function( $ ) {
                    var updateID = this.id;
                    updateID = updateID.replace( /\D/g,'' );
                    updateIds.push( updateID );
+                   console.log('Update IDs: ' + updateIds)
                } );
                if ( response.data != '' ) {
+                   console.log(response.data);
                    $( '.jm-live-blog-outer .jm-live-blog-section-outer #jm-live-blog-new-updates' ).show();
                    $( '.jm-live-blog-outer .jm-live-blog-section-outer #jm-live-blog-new-updates' ).on( 'click', function() {
                        $( '.jm-live-blog-outer .jm-live-blog-section-outer #jm-live-blog-new-updates' ).hide();
                        $( ".jm-live-blog-outer .jm-live-blog-section" ).animate( { scrollTop: 0 }, "fast" );
-                       var html = $( response.data ).html();
                        $( response.data ).insertBefore( '.jm-live-blog-outer .jm-live-blog-section .jm-live-blog-update:first' ).fadeIn( 'fast' );
+                       response.data = '';
                    } );
                } else {
                }
