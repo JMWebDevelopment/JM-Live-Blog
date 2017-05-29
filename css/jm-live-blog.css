@@ -33,6 +33,8 @@
     z-index: 99999;
     display: none;
     cursor: pointer;
+    justify-content: center;
+    flex-direction: column;
 }
 .jm-live-blog-outer .jm-live-blog-section .jm-live-blog-update {
     border-bottom: 1px solid #BBBBBB;
