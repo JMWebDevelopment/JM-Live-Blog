@@ -163,8 +163,16 @@ function jm_live_blog_meta_box_save( $post_id ) {
 	$old = get_post_meta( $post_id, 'live_blog_updates', true );
 	$new = array();
 
-	$title = $_POST[ 'live_blog_updates_title' ];
-	$time = $_POST[ 'live_blog_updates_time' ];
+	if ( isset( $_POST[ 'live_blog_updates_title' ] ) ) {
+        $title = $_POST[ 'live_blog_updates_title' ];
+    } else {
+	    $title = [];
+    }
+    if ( isset( $_POST[ 'live_blog_updates_time' ] ) ) {
+        $time = $_POST[ 'live_blog_updates_time' ];
+    } else {
+	    $time = [];
+    }
 	$content = $_POST[ 'live_blog_updates_content' ];
 	$color = $_POST[ 'live_blog_color_scheme' ];
     $alert_color = $_POST[ 'live_blog_alert_color' ];
