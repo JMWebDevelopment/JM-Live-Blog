@@ -3,7 +3,7 @@ Contributors: ArenaPigskin
 Tags: live blog, ajax, live updates, blog
 Donate link: http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Requires at least: 4.3
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: 1.1
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -27,6 +27,8 @@ Live blogs are the essential tool for keeping readers up to date in any breaking
 = 1.2 =
 - Fixed: Issue with posts being duplicated when hitting "New Updates" button.
 - Fixed: Titles with double quotes not showing up correctly.
+- Fixed: Issue with first post not being loaded correctly.
+- FIxed: Errors showing when all updates are deleted.
 - Tested with WordPress 4.8.
 
 = 1.1 =
