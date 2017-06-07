@@ -7,7 +7,7 @@
  * @package Sports Bench
  * @author Jacob Martella
  * @since 1.0
- * @version 1.1
+ * @version 1.2
  */
 //* Set the array for the color scheme dropdown
 global $color_array;
