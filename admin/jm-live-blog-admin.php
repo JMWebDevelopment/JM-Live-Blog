@@ -17,7 +17,7 @@ $color_array[ 'dark' ] = 'Dark';
 
 //* Add the meta box
 function jm_live_blog_add_meta_boxes() {
-	add_meta_box( 'live-blog-updates-meta', __( 'Live Blog Updates', 'jm-live-blog' ) , 'jm_live_blog_meta_box_display', 'post', 'normal', 'default' );
+	add_meta_box( 'live-blog-updates-meta', __( 'Live Blog Updates', 'jm-live-blog' ) , 'jm_live_blog_meta_box_display', array( 'post', 'page' ), 'normal', 'default' );
 }
 add_action( 'admin_init', 'jm_live_blog_add_meta_boxes' );
 

@@ -28,7 +28,7 @@ Live blogs are the essential tool for keeping readers up to date in any breaking
 - Fixed: Issue with posts being duplicated when hitting "New Updates" button.
 - Fixed: Titles with double quotes not showing up correctly.
 - Fixed: Issue with first post not being loaded correctly.
-- FIxed: Errors showing when all updates are deleted.
+- Fixed: Errors showing when all updates are deleted.
 - Tested with WordPress 4.8.
 
 = 1.1 =
