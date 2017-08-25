@@ -53,6 +53,8 @@ add_action( 'plugins_loaded', 'jm_live_blog_load_plugin_textdomain' );
  */
 include_once( JM_LIVE_BLOG . 'admin/jm-live-blog-admin.php' );
 
+include_once( JM_LIVE_BLOG . 'jm-live-blog-widget.php' );
+
 /**
  * Register the live blog shortcode
  */

@@ -92,3 +92,14 @@
 .jm-live-blog-outer.dark .jm-live-blog-section .jm-live-blog-update .live-blog-right h6 {
     color: #FFFFFF;
 }
+.jm-live-blog-widget-outer.jm-live-blog-outer .jm-live-blog-section {
+    height: 400px;
+}
+.jm-live-blog-widget-outer.jm-live-blog-outer .jm-live-blog-update .live-blog-left {
+    width: 100%;
+    padding-right: 2%;
+}
+.jm-live-blog-widget-outer.jm-live-blog-outer .jm-live-blog-update .live-blog-right {
+    width: 100%;
+    padding-left: 20px;
+}

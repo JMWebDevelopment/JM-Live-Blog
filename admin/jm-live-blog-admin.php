@@ -28,14 +28,20 @@ function jm_live_blog_meta_box_display() {
 	$updates = get_post_meta( $post->ID, 'live_blog_updates', true );
 	$color_scheme = get_post_meta( $post->ID, 'live_blog_color_scheme', true );
     $alert_color = get_post_meta( $post->ID, 'live_blog_alert_color', true );
+    $show_widget = get_post_meta( $post->ID, 'live_blog_show_widget', true );
+    $widget_title = get_post_meta( $post->ID, 'live_blog_widget_title', true );
+    $widget_description = get_post_meta( $post->ID, 'live_blog_widget_description', true );
 	wp_nonce_field( 'live_blog_updates_meta_box_nonce', 'live_blog_updates_meta_box_nonce' );
+	if ( $show_widget == '' || $show_widget == null ) {
+	    $show_widget = 0;
+    }
 
 	echo '<div id="jm-live-blog-repeatable-fieldset-one" width="100%">';
 
 	echo '<table class="jm-live-blog-field">';
 	echo '<tr>';
 	echo '<td><label for="live_blog_color_scheme">' . __( 'Color Scheme', 'jm-live-blog' ) . '</label></td>';
-	echo '<td><select class="live_blog_color_scheme" name="live_blog_color_scheme">';
+	echo '<td colspan="2"><select class="live_blog_color_scheme" name="live_blog_color_scheme">';
 	foreach ( $color_array as $key => $name ) {
 		if ( $key == $color_scheme ) {
 			$selected = 'selected="selected"';
@@ -48,7 +54,20 @@ function jm_live_blog_meta_box_display() {
 	echo '</tr>';
     echo '<tr>';
     echo '<td><label for="live_blog_alert_color">' . __( 'New Update Alert Color', 'jm-live-blog' ) . '</label></td>';
-    echo '<td><input type="text" name="live_blog_alert_color" id="live_blog_alert_color" value="' . $alert_color . '" class="cpa-color-picker" ></td>';
+    echo '<td colspan="2"><input type="text" name="live_blog_alert_color" id="live_blog_alert_color" value="' . $alert_color . '" class="cpa-color-picker" ></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td><label for="live_blog_show_widget">' . __( 'Use Live Blog Widget', 'jm-live-blog' ) . '</label></td>';
+    echo '<td><input type="radio" name="live_blog_show_widget" id="live_blog_hide_widget" value="no" ' . checked( $show_widget, 0, false ) . ' /> ' . __( 'No', 'jm-live-blog' ) . '</td>';
+    echo '<td><input type="radio" name="live_blog_show_widget" id="live_blog_show_widget" value="yes" ' . checked( $show_widget, 1, false ) . ' /> ' . __( 'Yes', 'jm-live-blog' ) . '</td>';
+    echo '</tr>';
+    echo '<tr id="jm-live-blog-widget-title-row">';
+    echo '<td><label for="live_blog_widget_title">' . __( 'Live Blog Widget Title', 'jm-live-blog' ) . '</label></td>';
+    echo '<td colspan="2"><input type="text" name="live_blog_widget_title" id="live_blog_widget_title" value="' . $widget_title . '" /></td>';
+    echo '</tr>';
+    echo '<tr id="jm-live-blog-widget-description-row">';
+    echo '<td><label for="live_blog_widget_description">' . __( 'Live Blog Widget Description', 'jm-live-blog' ) . '</label></td>';
+    echo '<td colspan="2"><input type="text" name="live_blog_widget_description" id="live_blog_widget_description" value="' . $widget_description . '" /></td>';
     echo '</tr>';
 	echo '</table>';
 
@@ -176,12 +195,24 @@ function jm_live_blog_meta_box_save( $post_id ) {
 	$content = $_POST[ 'live_blog_updates_content' ];
 	$color = $_POST[ 'live_blog_color_scheme' ];
     $alert_color = $_POST[ 'live_blog_alert_color' ];
+    $widget_title = $_POST[ 'live_blog_widget_title' ];
+    $widget_description = $_POST[ 'live_blog_widget_description' ];
 
 	$num = count( $title );
 
 	if ( $color && array_key_exists( $color, $color_array ) ) {
 		update_post_meta( $post_id, 'live_blog_color_scheme', wp_filter_nohtml_kses( $_POST[ 'live_blog_color_scheme' ] ) );
 	}
+
+	if ( $_POST[ 'live_blog_show_widget' ] == 'yes' ) {
+	    $widget = 1;
+    } else {
+	    $widget = 0;
+    }
+
+    update_post_meta( $post_id, 'live_blog_show_widget', intval( $widget ) );
+    update_post_meta( $post_id, 'live_blog_widget_title', wp_filter_nohtml_kses( $widget_title ) );
+    update_post_meta( $post_id, 'live_blog_widget_description', wp_filter_nohtml_kses( $widget_description ) );
 
     $alert_color = trim( $alert_color );
     $alert_color = strip_tags( stripslashes( $alert_color ) );
