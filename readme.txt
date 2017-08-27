@@ -4,7 +4,7 @@ Tags: live blog, ajax, live updates, blog
 Donate link: http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Requires at least: 4.3
 Tested up to: 4.8
-Stable tag: 1.2
+Stable tag: 1.3
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +24,10 @@ Live blogs are the essential tool for keeping readers up to date in any breaking
 3. The live blog in action inside of a post.
 
 == Changelog ==
+= 1.3 =
+- Added: Support to show live blog on pages as well as posts.
+- Added: Widget to show live blog in the sidebar of posts if desired.
+
 = 1.2 =
 - Fixed: Issue with posts being duplicated when hitting "New Updates" button.
 - Fixed: Titles with double quotes not showing up correctly.

@@ -21,8 +21,8 @@ class JM_Live_Blog_Widget extends WP_Widget {
             'jm_live_blog_widget',
             __( 'JM Live Blog Widget', 'jm-live-blog' ),
             array(
-                'classname'     => 'story_lines_widget',
-                'description'   => __( 'Displays the story lines for an article in a widget for the sidebar.', 'jm-live-blog' )
+                'classname'     => 'jm_live_blog_widget',
+                'description'   => __( 'Displays the live blog for a post or page in a widget for the sidebar.', 'jm-live-blog' )
             )
         );
     }
@@ -34,12 +34,12 @@ class JM_Live_Blog_Widget extends WP_Widget {
      *
      * @param array $instance
      *
-     * @since 1.2
+     * @since 1.3
      */
     public function widget( $args, $instance ) {
         extract( $args );
 
-        if ( is_single() ) {
+        if ( is_singular() ) {
 
             if ( get_post_meta( get_the_ID(), 'live_blog_show_widget', true ) == 1 ) {
 

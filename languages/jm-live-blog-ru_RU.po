@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: JM Live Blog\n"
-"POT-Creation-Date: 2016-11-17 20:01-0600\n"
-"PO-Revision-Date: 2016-11-17 20:01-0600\n"
+"POT-Creation-Date: 2017-08-27 17:23-0500\n"
+"PO-Revision-Date: 2017-08-27 17:24-0500\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ru_RU\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-WPHeader: jm-live-blog.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -25,39 +25,67 @@ msgstr ""
 msgid "Live Blog Updates"
 msgstr "Активное обновление"
 
-#: admin/jm-live-blog-admin.php:37
+#: admin/jm-live-blog-admin.php:43
 msgid "Color Scheme"
 msgstr "Цветова схема"
 
-#: admin/jm-live-blog-admin.php:50
+#: admin/jm-live-blog-admin.php:56
 msgid "New Update Alert Color"
 msgstr "Новое обновление оповещений цвет"
 
-#: admin/jm-live-blog-admin.php:55
+#: admin/jm-live-blog-admin.php:60
+msgid "Use Live Blog Widget"
+msgstr "Использование живой блог виджет"
+
+#: admin/jm-live-blog-admin.php:61
+msgid "No"
+msgstr "Нет"
+
+#: admin/jm-live-blog-admin.php:62
+msgid "Yes"
+msgstr "Да"
+
+#: admin/jm-live-blog-admin.php:65
+msgid "Live Blog Widget Title"
+msgstr "Заголовок виджета блога"
+
+#: admin/jm-live-blog-admin.php:69
+msgid "Live Blog Widget Description"
+msgstr "Live блог виджет описание"
+
+#: admin/jm-live-blog-admin.php:74
 msgid "Add Update"
 msgstr "Добавление обновления"
 
-#: admin/jm-live-blog-admin.php:60 admin/jm-live-blog-admin.php:92
-#: admin/jm-live-blog-admin.php:118
+#: admin/jm-live-blog-admin.php:79 admin/jm-live-blog-admin.php:111
+#: admin/jm-live-blog-admin.php:137
 msgid "Update Title"
 msgstr "Название обновления"
 
-#: admin/jm-live-blog-admin.php:65 admin/jm-live-blog-admin.php:97
-#: admin/jm-live-blog-admin.php:123
+#: admin/jm-live-blog-admin.php:84 admin/jm-live-blog-admin.php:116
+#: admin/jm-live-blog-admin.php:142
 msgid "Update Time"
 msgstr "Время обновления"
 
-#: admin/jm-live-blog-admin.php:70 admin/jm-live-blog-admin.php:102
-#: admin/jm-live-blog-admin.php:128
+#: admin/jm-live-blog-admin.php:89 admin/jm-live-blog-admin.php:121
+#: admin/jm-live-blog-admin.php:147
 msgid "Update Content"
 msgstr "Обновление контента"
 
-#: admin/jm-live-blog-admin.php:76 admin/jm-live-blog-admin.php:109
-#: admin/jm-live-blog-admin.php:134
+#: admin/jm-live-blog-admin.php:95 admin/jm-live-blog-admin.php:128
+#: admin/jm-live-blog-admin.php:153
 msgid "Remove Update"
 msgstr "Удаление обновления"
 
-#: jm-live-blog.php:99
+#: jm-live-blog-widget.php:22
+msgid "JM Live Blog Widget"
+msgstr ""
+
+#: jm-live-blog-widget.php:25
+msgid "Displays the live blog for a post or page in a widget for the sidebar."
+msgstr "Отображает живой блог пост или страницу в виджет для боковой панели."
+
+#: jm-live-blog-widget.php:71 jm-live-blog.php:101
 msgid "New Updates"
 msgstr "Нет новых обновлений"
 
