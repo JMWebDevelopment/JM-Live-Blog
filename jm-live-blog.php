@@ -3,7 +3,7 @@
 Plugin Name: JM Live Blog
 Plugin URI:  http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Description: Live blogs are the essential tool for keeping readers up to date in any breaking news situation or sporting event. Using the power of AJAX, JM Live Blog allows you to add a live blog to any post with a simple shortcode to keep your readers in the know.
-Version:     1.3.1
+Version:     1.3.2
 Author:      Jacob Martella
 Author URI:  http://www.jacobmartella.com
 License:     GPL3
@@ -34,11 +34,15 @@ add_action( 'wp_enqueue_scripts', 'jm_live_blog_scripts' );
  * Enqueue the back end scripts
  */
 function jm_live_blog_admin_scripts() {
-	wp_enqueue_script( 'jquery' );
-    wp_enqueue_script( 'wp-color-picker');
-    wp_enqueue_style( 'wp-color-picker' );
-	wp_enqueue_script( 'jm-live-blog-admin', plugins_url() . '/jm-live-blog/js/jm-live-blog-admin.js' );
-	wp_enqueue_style( 'jm-live-blog-admin-css', plugins_url() . '/jm-live-blog/css/jm-live-blog-admin.css' );
+    global $pagenow;
+    global $post;
+    if ( ( $pagenow == 'post.php' or $pagenow == 'post-new.php' ) && ( $post->post_type == 'post' || $post->post_type == 'page' ) ) {
+        wp_enqueue_script('jquery');
+        wp_enqueue_script('wp-color-picker');
+        wp_enqueue_style('wp-color-picker');
+        wp_enqueue_script('jm-live-blog-admin', plugins_url() . '/jm-live-blog/js/jm-live-blog-admin.js');
+        wp_enqueue_style('jm-live-blog-admin-css', plugins_url() . '/jm-live-blog/css/jm-live-blog-admin.css');
+    }
 }
 add_action( 'admin_enqueue_scripts', 'jm_live_blog_admin_scripts' );
 
