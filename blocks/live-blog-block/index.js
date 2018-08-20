@@ -4,6 +4,7 @@
  * Registering a basic block with Gutenberg.
  * Simple block, renders and saves the same content without any interactivity.
  */
+import icon from './icon';
 
 const { __ } = wp.i18n;
 const {
@@ -43,7 +44,7 @@ const { ToggleControl } = InspectorControls;
 registerBlockType( 'jm-live-blog/jm-live-blog-block', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
     title: __('JM Live Blog', 'jm-live-blog' ),
-    icon: 'lightbulb', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
+    icon: icon, // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
     category: 'widgets', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
     keywords: [
         __( 'JM Live Blog', 'jm-live-blog' ),
