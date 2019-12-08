@@ -301,18 +301,16 @@ function jm_live_blog_blocks_editor_scripts() {
 	);
 	// Pass in REST URL
 	wp_localize_script(
-		'jsforwp-blocks-js',
+		'jm-live-blog-blocks-js',
 		'jsforwp_globals',
 		[
 			'rest_url' => esc_url( rest_url() )
 		]);
 	// Enqueue optional editor only styles
-	/*wp_enqueue_style(
-		'jsforwp-blocks-editor-css',
-		plugins_url( $editorStylePath, __FILE__),
-		[ 'wp-blocks' ],
-		filemtime( plugin_dir_path( __FILE__ ) . $editorStylePath )
-	);*/
+	wp_enqueue_style(
+		'jm-live-blog-editor-css',
+		plugins_url( $editorStylePath, __FILE__)
+	);
 }
 // Hook scripts function into block editor hook
 add_action( 'enqueue_block_editor_assets', 'jm_live_blog_blocks_editor_scripts' );

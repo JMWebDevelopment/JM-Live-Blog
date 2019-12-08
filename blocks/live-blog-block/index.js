@@ -5,42 +5,24 @@
  * Simple block, renders and saves the same content without any interactivity.
  */
 import icon from './icon';
+import './editor.scss';
 
 const { __ } = wp.i18n;
 const {
-    Editable,
-    MediaUpload,
-    InspectorControls,
-    blockEditRender,
-    Spinner,
-    ColorPalette
-} = wp.editor; // Import registerBlockType() from wp.blocks
+    PanelColor,
+    InspectorControls
+} = wp.editor;// Import registerBlockType() from wp.blocks
 const { registerBlockType } = wp.blocks;
 const {
-    PanelColor,
+    ColorPalette,
     PanelBody,
     TextControl,
-    Button,
     SelectControl,
 } = wp.components;
 
 //this is where block control componants go! a-ha!
-const { ToggleControl } = InspectorControls;
+//const { ToggleControl } = InspectorControls;
 
-//this is where block control componants go! a-ha!
-//const { ToggleControl, SelectControl } = InspectorControls;
-/**
- * Register: aa Gutenberg Block.
- *
- * Registers a new block provided a unique name and an object defining its
- * behavior. Once registered, the block is made editor as an option to any
- * editor interface where blocks are implemented.
- *
- * @param  {string}   name     Block name.
- * @param  {Object}   settings Block settings.
- * @return {?WPBlock}          The block, if it has been successfully
- *                             registered; otherwise `undefined`.
- */
 registerBlockType( 'jm-live-blog/jm-live-blog-block', {
     // Block name. Block names must be string that contains a namespace prefix. Example: my-plugin/my-custom-block.
     title: __('JM Live Blog', 'jm-live-blog' ),
@@ -54,6 +36,7 @@ registerBlockType( 'jm-live-blog/jm-live-blog-block', {
     attributes: {
         jm_live_blog_color_scheme: {
             type: 'string',
+            default: 'light'
         },
         jm_live_blog_update_color: {
             type: 'string',
@@ -61,11 +44,11 @@ registerBlockType( 'jm-live-blog/jm-live-blog-block', {
         },
         jm_live_blog_title: {
             type: 'string',
-            default: ''
+            default: 'Title'
         },
         jm_live_blog_description: {
             type: 'string',
-            default: ''
+            default: 'Description'
         }
     },
 
@@ -74,8 +57,13 @@ registerBlockType( 'jm-live-blog/jm-live-blog-block', {
 
         const { attributes: { jm_live_blog_color_scheme, jm_live_blog_update_color, jm_live_blog_title, jm_live_blog_description },
             className, setAttributes, isSelected } = props;
+        const divStyle = {
+            backgroundColor: jm_live_blog_update_color
+        };
+
+
         return [
-            <InspectorControls key="inspector">
+            <InspectorControls>
                 <PanelBody>
                     <TextControl
                         label={ __( 'Live Blog Title', 'jm-live-blog' ) }
@@ -102,19 +90,20 @@ registerBlockType( 'jm-live-blog/jm-live-blog-block', {
                     />
                 </PanelBody>
 
-                <PanelColor
-                    title={ __( 'New Update Alert Color', 'jm-live-blog' ) }
-                    colorValue={ jm_live_blog_update_color }
-                >
-                    <ColorPalette
-                        value={ jm_live_blog_update_color }
-                        onChange={ jm_live_blog_update_color => setAttributes( { jm_live_blog_update_color } ) }
-                    />
-                </PanelColor>
             </InspectorControls>,
             <div className={className}>
-                <h2>{__('JM Live Blog', 'jm-live-blog')}</h2>
-                <p>{__('The JM Live Blog block isn\'t directly editable. You can make changes to the color of the plugin by changing the attributes in the right-hand column. You can updates through the meta fields at the bottom of the editor.', 'jm-live-blog')}</p>
+                <div id="jm-live-blog" className={ [ jm_live_blog_color_scheme, ' jm-live-blog-outer' ] }>
+                    <div className="jm-live-blog-inner">
+                        <h3 className="jm-live-blog-title">{ jm_live_blog_title }</h3>
+                        <p className="jm-live-blog-description">{ jm_live_blog_description }</p>
+                        <div className="jm-live-blog-section-outer">
+                            <span id="jm-live-blog-new-updates" style={divStyle}>{ __( 'New Updates', 'jm-live-blog' ) }</span>
+                            <section className="jm-live-blog-section">
+                                <p>{ __( 'You can add live updates using the custom fields below.', 'jm-live-blog' ) }</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
             </div>
         ];
     },
