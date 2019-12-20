@@ -3,7 +3,7 @@
 Plugin Name: JM Live Blog
 Plugin URI:  http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Description: Live blogs are the essential tool for keeping readers up to date in any breaking news situation or sporting event. Using the power of AJAX, JM Live Blog allows you to add a live blog to any post with a simple shortcode to keep your readers in the know.
-Version:     1.3.2
+Version:     1.4
 Author:      Jacob Martella
 Author URI:  http://www.jacobmartella.com
 License:     GPL3
@@ -312,12 +312,13 @@ function jm_live_blog_blocks_editor_scripts() {
 		plugins_url( $editorStylePath, __FILE__)
 	);
 }
-// Hook scripts function into block editor hook
-add_action( 'enqueue_block_editor_assets', 'jm_live_blog_blocks_editor_scripts' );
 
-register_block_type( 'jm-live-blog/jm-live-blog-block', array(
-	'render_callback' => 'rendered_jm_live_blog',
-));
+if ( is_plugin_active('gutenberg/gutenberg.php') || version_compare(get_bloginfo('version'),'4.9', '>') ) {
+	add_action( 'enqueue_block_editor_assets', 'jm_live_blog_blocks_editor_scripts' );
+	register_block_type( 'jm-live-blog/jm-live-blog-block', array(
+		'render_callback' => 'rendered_jm_live_blog',
+	) );
+}
 
 function rendered_jm_live_blog( $attributes ) {
 	$html = '';
