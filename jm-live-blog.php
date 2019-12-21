@@ -313,12 +313,15 @@ function jm_live_blog_blocks_editor_scripts() {
 	);
 }
 
-if ( is_plugin_active('gutenberg/gutenberg.php') || version_compare(get_bloginfo('version'),'4.9', '>') ) {
-	add_action( 'enqueue_block_editor_assets', 'jm_live_blog_blocks_editor_scripts' );
-	register_block_type( 'jm-live-blog/jm-live-blog-block', array(
-		'render_callback' => 'rendered_jm_live_blog',
-	) );
+function jm_live_blog_check_gutenberg() {
+	if ( is_plugin_active( 'gutenberg/gutenberg.php' ) || version_compare( get_bloginfo( 'version' ), '4.9', '>' ) ) {
+		add_action( 'enqueue_block_editor_assets', 'jm_live_blog_blocks_editor_scripts' );
+		register_block_type( 'jm-live-blog/jm-live-blog-block', array(
+			'render_callback' => 'rendered_jm_live_blog',
+		) );
+	}
 }
+add_action( 'admin_init', 'jm_live_blog_check_gutenberg' );
 
 function rendered_jm_live_blog( $attributes ) {
 	$html = '';

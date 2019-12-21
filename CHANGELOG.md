@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.1
+- Fixed issue with `is_plugin_active` function not being called correctly.
+
 ## 1.4
 - Added the JM Live Blog Gutenberg block.
 - Tested with WordPress 5.3.
