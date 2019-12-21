@@ -7,7 +7,7 @@
  * @package Sports Bench
  * @author Jacob Martella
  * @since 1.0
- * @version 1.3
+ * @version 1.4
  */
 //* Set the array for the color scheme dropdown
 global $color_array;
@@ -25,6 +25,9 @@ add_action( 'admin_init', 'jm_live_blog_add_meta_boxes' );
 function jm_live_blog_meta_box_display() {
 	global $post;
 	global $color_array;
+	global $current_screen;
+	$current_screen = get_current_screen();
+
 	$updates = get_post_meta( $post->ID, 'live_blog_updates', true );
 	$color_scheme = get_post_meta( $post->ID, 'live_blog_color_scheme', true );
     $alert_color = get_post_meta( $post->ID, 'live_blog_alert_color', true );
@@ -38,62 +41,64 @@ function jm_live_blog_meta_box_display() {
 
 	echo '<div id="jm-live-blog-repeatable-fieldset-one" width="100%">';
 
-	echo '<table class="jm-live-blog-field">';
-	echo '<tr>';
-	echo '<td><label for="live_blog_color_scheme">' . __( 'Color Scheme', 'jm-live-blog' ) . '</label></td>';
-	echo '<td colspan="2"><select class="live_blog_color_scheme" name="live_blog_color_scheme">';
-	foreach ( $color_array as $key => $name ) {
-		if ( $key == $color_scheme ) {
-			$selected = 'selected="selected"';
-		} else {
-			$selected = '';
+	if ( ( ! method_exists($current_screen, 'is_block_editor') && ! $current_screen->is_block_editor() ) || ( function_exists('is_gutenberg_page')) && ! is_gutenberg_page() ) {
+		echo '<table class="jm-live-blog-field">';
+		echo '<tr>';
+		echo '<td><label for="live_blog_color_scheme">' . __( 'Color Scheme', 'jm-live-blog' ) . '</label></td>';
+		echo '<td colspan="2"><select class="live_blog_color_scheme" name="live_blog_color_scheme">';
+		foreach ( $color_array as $key => $name ) {
+			if ( $key == $color_scheme ) {
+				$selected = 'selected="selected"';
+			} else {
+				$selected = '';
+			}
+			echo '<option value="' . $key . '" ' . $selected . '>' . $name . '</option>';
 		}
-		echo '<option value="' . $key . '" ' . $selected . '>' . $name . '</option>';
+		echo '</select></td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td><label for="live_blog_alert_color">' . __( 'New Update Alert Color', 'jm-live-blog' ) . '</label></td>';
+		echo '<td colspan="2"><input type="text" name="live_blog_alert_color" id="live_blog_alert_color" value="' . $alert_color . '" class="cpa-color-picker" ></td>';
+		echo '</tr>';
+		echo '<tr>';
+		echo '<td><label for="live_blog_show_widget">' . __( 'Use Live Blog Widget', 'jm-live-blog' ) . '</label></td>';
+		echo '<td><input type="radio" name="live_blog_show_widget" id="live_blog_hide_widget" value="no" ' . checked( $show_widget, 0, false ) . ' /> ' . __( 'No', 'jm-live-blog' ) . '</td>';
+		echo '<td><input type="radio" name="live_blog_show_widget" id="live_blog_show_widget" value="yes" ' . checked( $show_widget, 1, false ) . ' /> ' . __( 'Yes', 'jm-live-blog' ) . '</td>';
+		echo '</tr>';
+		echo '<tr id="jm-live-blog-widget-title-row">';
+		echo '<td><label for="live_blog_widget_title">' . __( 'Live Blog Widget Title', 'jm-live-blog' ) . '</label></td>';
+		echo '<td colspan="2"><input type="text" name="live_blog_widget_title" id="live_blog_widget_title" value="' . $widget_title . '" /></td>';
+		echo '</tr>';
+		echo '<tr id="jm-live-blog-widget-description-row">';
+		echo '<td><label for="live_blog_widget_description">' . __( 'Live Blog Widget Description', 'jm-live-blog' ) . '</label></td>';
+		echo '<td colspan="2"><input type="text" name="live_blog_widget_description" id="live_blog_widget_description" value="' . $widget_description . '" /></td>';
+		echo '</tr>';
+		echo '</table>';
+
+		echo '<p><a id="live-blog-add-row" class="button" href="#">' . __( 'Add Update', 'jm-live-blog' ) . '</a></p>';
+
+		//* Set up a hidden group of fields for the jQuery to grab
+		echo '<table class="live-blog-empty-row screen-reader-text">';
+		echo '<tr>';
+		echo '<td><label for="live_blog_updates_title">' . __( 'Update Title', 'jm-live-blog' ) . '</label></td>';
+		echo '<td><input class="new-field jm_live_blog_input" disabled="disabled" type="text" name="live_blog_updates_title[]" id="live_blog_updates_title" value="" /></td>';
+		echo '</tr>';
+
+		echo '<tr>';
+		echo '<td><label for="live_blog_updates_time">' . __( 'Update Time', 'jm-live-blog' ) . '</label></td>';
+		echo '<td><input class="new-field jm_live_blog_input" disabled="disabled" type="text" name="live_blog_updates_time[]" id="live_blog_updates_time" value="" /></td>';
+		echo '</tr>';
+
+		echo '<tr>';
+		echo '<td><label for="live_blog_updates_content">' . __( 'Update Content', 'jm-live-blog' ) . '</label></td>';
+		echo '<td>';
+		wp_editor( '', 'live_blog_updates_content_hidden', $settings = array( 'textarea_name' => 'live_blog_updates_content[]' ) );
+		echo '</td>';
+		echo '</tr>';
+
+		echo '<tr><td><a class="button live-blog-remove-row" href="#">' . __( 'Remove Update', 'jm-live-blog' ) . '</a></td></tr>';
+		echo '</table>';
 	}
-	echo '</select></td>';
-	echo '</tr>';
-    echo '<tr>';
-    echo '<td><label for="live_blog_alert_color">' . __( 'New Update Alert Color', 'jm-live-blog' ) . '</label></td>';
-    echo '<td colspan="2"><input type="text" name="live_blog_alert_color" id="live_blog_alert_color" value="' . $alert_color . '" class="cpa-color-picker" ></td>';
-    echo '</tr>';
-    echo '<tr>';
-    echo '<td><label for="live_blog_show_widget">' . __( 'Use Live Blog Widget', 'jm-live-blog' ) . '</label></td>';
-    echo '<td><input type="radio" name="live_blog_show_widget" id="live_blog_hide_widget" value="no" ' . checked( $show_widget, 0, false ) . ' /> ' . __( 'No', 'jm-live-blog' ) . '</td>';
-    echo '<td><input type="radio" name="live_blog_show_widget" id="live_blog_show_widget" value="yes" ' . checked( $show_widget, 1, false ) . ' /> ' . __( 'Yes', 'jm-live-blog' ) . '</td>';
-    echo '</tr>';
-    echo '<tr id="jm-live-blog-widget-title-row">';
-    echo '<td><label for="live_blog_widget_title">' . __( 'Live Blog Widget Title', 'jm-live-blog' ) . '</label></td>';
-    echo '<td colspan="2"><input type="text" name="live_blog_widget_title" id="live_blog_widget_title" value="' . $widget_title . '" /></td>';
-    echo '</tr>';
-    echo '<tr id="jm-live-blog-widget-description-row">';
-    echo '<td><label for="live_blog_widget_description">' . __( 'Live Blog Widget Description', 'jm-live-blog' ) . '</label></td>';
-    echo '<td colspan="2"><input type="text" name="live_blog_widget_description" id="live_blog_widget_description" value="' . $widget_description . '" /></td>';
-    echo '</tr>';
-	echo '</table>';
-
-	echo '<p><a id="live-blog-add-row" class="button" href="#">' . __( 'Add Update', 'jm-live-blog' ) . '</a></p>';
-
-	//* Set up a hidden group of fields for the jQuery to grab
-	echo '<table class="live-blog-empty-row screen-reader-text">';
-	echo '<tr>';
-	echo '<td><label for="live_blog_updates_title">' . __( 'Update Title', 'jm-live-blog' ) . '</label></td>';
-	echo '<td><input class="new-field jm_live_blog_input" disabled="disabled" type="text" name="live_blog_updates_title[]" id="live_blog_updates_title" value="" /></td>';
-	echo '</tr>';
-
-	echo '<tr>';
-	echo '<td><label for="live_blog_updates_time">' . __( 'Update Time', 'jm-live-blog' ) . '</label></td>';
-	echo '<td><input class="new-field jm_live_blog_input" disabled="disabled" type="text" name="live_blog_updates_time[]" id="live_blog_updates_time" value="" /></td>';
-	echo '</tr>';
-
-	echo '<tr>';
-	echo '<td><label for="live_blog_updates_content">' . __( 'Update Content', 'jm-live-blog' ) . '</label></td>';
-	echo '<td>';
-	wp_editor( '', 'live_blog_updates_content_hidden', $settings = array( 'textarea_name'=>'live_blog_updates_content[]' ) );
-	echo '</td>';
-	echo '</tr>';
-
-	echo '<tr><td><a class="button live-blog-remove-row" href="#">' . __( 'Remove Update', 'jm-live-blog' ) . '</a></td></tr>';
-	echo '</table>';
 	
 	//* Check for fields already filled out
 	if ( $updates ) {

@@ -21,7 +21,7 @@ jQuery( document ).ready( function() {
         jQuery( '#jm-live-blog-widget-description-row' ).hide();
     }
 
-    $('input[type=radio][name=live_blog_show_widget]').change(function() {
+    jQuery('input[type=radio][name=live_blog_show_widget]').change(function() {
         if (this.value === 'yes') {
             jQuery( '#jm-live-blog-widget-title-row' ).show();
             jQuery( '#jm-live-blog-widget-description-row' ).show();

@@ -6,7 +6,7 @@
  *
  * @author Jacob Martella
  * @package JM Live Blog
- * @version 1.3
+ * @version 1.4
  * @since 1.3
  */
 class JM_Live_Blog_Widget extends WP_Widget {

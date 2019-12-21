@@ -3,7 +3,7 @@
 Plugin Name: JM Live Blog
 Plugin URI:  http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Description: Live blogs are the essential tool for keeping readers up to date in any breaking news situation or sporting event. Using the power of AJAX, JM Live Blog allows you to add a live blog to any post with a simple shortcode to keep your readers in the know.
-Version:     1.3.2
+Version:     1.4
 Author:      Jacob Martella
 Author URI:  http://www.jacobmartella.com
 License:     GPL3
@@ -286,4 +286,87 @@ function jm_live_blog_add_buttons( $plugin_array ) {
 function jm_live_blog_register_buttons( $buttons ) {
 	array_push( $buttons, 'jm_live_blog' );
 	return $buttons;
+}
+
+function jm_live_blog_blocks_editor_scripts() {
+	// Make paths variables so we don't write em twice ;)
+	$blockPath = '/js/editor.blocks.js';
+	$editorStylePath = '/assets/css/blocks.editor.css';
+	// Enqueue the bundled block JS file
+	wp_enqueue_script(
+		'jm-live-blog-blocks-js',
+		plugins_url( $blockPath, __FILE__ ),
+		[ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-api' ],
+		filemtime( plugin_dir_path(__FILE__) . $blockPath )
+	);
+	// Pass in REST URL
+	wp_localize_script(
+		'jm-live-blog-blocks-js',
+		'jsforwp_globals',
+		[
+			'rest_url' => esc_url( rest_url() )
+		]);
+	// Enqueue optional editor only styles
+	wp_enqueue_style(
+		'jm-live-blog-editor-css',
+		plugins_url( $editorStylePath, __FILE__)
+	);
+}
+
+if ( is_plugin_active('gutenberg/gutenberg.php') || version_compare(get_bloginfo('version'),'4.9', '>') ) {
+	add_action( 'enqueue_block_editor_assets', 'jm_live_blog_blocks_editor_scripts' );
+	register_block_type( 'jm-live-blog/jm-live-blog-block', array(
+		'render_callback' => 'rendered_jm_live_blog',
+	) );
+}
+
+function rendered_jm_live_blog( $attributes ) {
+	$html = '';
+
+	if ( $attributes[ 'jm_live_blog_color_scheme' ] && 'dark' === $attributes[ 'jm_live_blog_color_scheme' ] ) {
+		$style = 'dark';
+	} else {
+		$style = '';
+	}
+
+	if ( isset( $attributes[ 'jm_live_blog_update_color' ] ) && '' != $attributes[ 'jm_live_blog_update_color' ] ) {
+		$color = 'style="background-color:' . $attributes[ 'jm_live_blog_update_color' ] . ';"';
+	} else {
+		$color = '';
+	}
+
+	$html .= '<div id="jm-live-blog" class="jm-live-blog-outer ' . $style . '">';
+	$html .= '<div class="jm-live-blog-inner">';
+	if ( isset( $attributes[ 'jm_live_blog_title' ]) && $attributes[ 'jm_live_blog_title' ] != '' ) {
+		$html .= '<h3 class="jm-live-blog-title">' . $attributes[ 'jm_live_blog_title' ] . '</h3>';
+	}
+	if ( isset( $attributes[ 'jm_live_blog_description' ] ) && $attributes[ 'jm_live_blog_description' ] != '' ) {
+		$html .= '<p class="jm-live-blog-description">' . $attributes[ 'jm_live_blog_description' ] . '</p>';
+	}
+	$html .= '<div class="jm-live-blog-section-outer">';
+	$html .= '<span id="jm-live-blog-new-updates"' . $color . '>' . __( 'New Updates', 'jm-live-blog' ) . '</span>';
+	$html .= '<section class="jm-live-blog-section">';
+	$updates = get_post_meta( get_the_ID(), 'live_blog_updates', true );
+	$num_update = count ( $updates );
+	if ( $updates ) {
+		foreach ( $updates as $update ) {
+			$content = apply_filters( 'the_content', $update[ 'live_blog_updates_content' ] );
+			$html .= '<div id="' . $num_update . '" class="jm-live-blog-update clearfix">';
+			$html .= '<div class="live-blog-left">';
+			$html .= '<h5 class="live-blog-time">' . $update[ 'live_blog_updates_time' ] . '</h5>';
+			$html .= '</div>';
+			$html .= '<div class="live-blog-right">';
+			$html .= '<h4 class="live-blog-title">' . $update[ 'live_blog_updates_title' ] . '</h4>';
+			$html .= '<div class="live-blog-content">' . $content . '</div>';
+			$html .= '</div>';
+			$html .= '</div>';
+			$num_update--;
+		}
+	}
+	$html .= '</section>';
+	$html .= '</div>';
+	$html .= '</div>';
+	$html .= '</div>';
+
+	return $html;
 }
