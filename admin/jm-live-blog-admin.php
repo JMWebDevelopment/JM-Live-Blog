@@ -75,30 +75,31 @@ function jm_live_blog_meta_box_display() {
 		echo '</tr>';
 		echo '</table>';
 
-		echo '<p><a id="live-blog-add-row" class="button" href="#">' . __( 'Add Update', 'jm-live-blog' ) . '</a></p>';
-
-		//* Set up a hidden group of fields for the jQuery to grab
-		echo '<table class="live-blog-empty-row screen-reader-text">';
-		echo '<tr>';
-		echo '<td><label for="live_blog_updates_title">' . __( 'Update Title', 'jm-live-blog' ) . '</label></td>';
-		echo '<td><input class="new-field jm_live_blog_input" disabled="disabled" type="text" name="live_blog_updates_title[]" id="live_blog_updates_title" value="" /></td>';
-		echo '</tr>';
-
-		echo '<tr>';
-		echo '<td><label for="live_blog_updates_time">' . __( 'Update Time', 'jm-live-blog' ) . '</label></td>';
-		echo '<td><input class="new-field jm_live_blog_input" disabled="disabled" type="text" name="live_blog_updates_time[]" id="live_blog_updates_time" value="" /></td>';
-		echo '</tr>';
-
-		echo '<tr>';
-		echo '<td><label for="live_blog_updates_content">' . __( 'Update Content', 'jm-live-blog' ) . '</label></td>';
-		echo '<td>';
-		wp_editor( '', 'live_blog_updates_content_hidden', $settings = array( 'textarea_name' => 'live_blog_updates_content[]' ) );
-		echo '</td>';
-		echo '</tr>';
-
-		echo '<tr><td><a class="button live-blog-remove-row" href="#">' . __( 'Remove Update', 'jm-live-blog' ) . '</a></td></tr>';
-		echo '</table>';
 	}
+
+	echo '<p><a id="live-blog-add-row" class="button" href="#">' . __( 'Add Update', 'jm-live-blog' ) . '</a></p>';
+
+	//* Set up a hidden group of fields for the jQuery to grab
+	echo '<table class="live-blog-empty-row screen-reader-text">';
+	echo '<tr>';
+	echo '<td><label for="live_blog_updates_title">' . __( 'Update Title', 'jm-live-blog' ) . '</label></td>';
+	echo '<td><input class="new-field jm_live_blog_input" disabled="disabled" type="text" name="live_blog_updates_title[]" id="live_blog_updates_title" value="" /></td>';
+	echo '</tr>';
+
+	echo '<tr>';
+	echo '<td><label for="live_blog_updates_time">' . __( 'Update Time', 'jm-live-blog' ) . '</label></td>';
+	echo '<td><input class="new-field jm_live_blog_input" disabled="disabled" type="text" name="live_blog_updates_time[]" id="live_blog_updates_time" value="" /></td>';
+	echo '</tr>';
+
+	echo '<tr>';
+	echo '<td><label for="live_blog_updates_content">' . __( 'Update Content', 'jm-live-blog' ) . '</label></td>';
+	echo '<td>';
+	wp_editor( '', 'live_blog_updates_content_hidden', $settings = array( 'textarea_name' => 'live_blog_updates_content[]' ) );
+	echo '</td>';
+	echo '</tr>';
+
+	echo '<tr><td><a class="button live-blog-remove-row" href="#">' . __( 'Remove Update', 'jm-live-blog' ) . '</a></td></tr>';
+	echo '</table>';
 	
 	//* Check for fields already filled out
 	if ( $updates ) {
