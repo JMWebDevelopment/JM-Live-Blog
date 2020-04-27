@@ -314,7 +314,7 @@ function jm_live_blog_blocks_editor_scripts() {
 }
 
 function jm_live_blog_check_gutenberg() {
-	if ( is_plugin_active( 'gutenberg/gutenberg.php' ) || version_compare( get_bloginfo( 'version' ), '4.9', '>' ) ) {
+	if ( in_array( 'gutenberg/gutenberg.php', get_option( 'active_plugins', array() ) ) || version_compare( get_bloginfo( 'version' ), '4.9', '>' ) ) {
 		register_block_type( 'jm-live-blog/jm-live-blog-block', array(
 			'render_callback' => 'rendered_jm_live_blog',
 		) );
