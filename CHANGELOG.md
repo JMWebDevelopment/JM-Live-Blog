@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.4.2
+- Fixed an issue with the "Add Update" button not showing.
+
 ## 1.4.1
 - Fixed issue with `is_plugin_active` function not being called correctly.
 
