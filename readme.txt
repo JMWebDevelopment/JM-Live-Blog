@@ -4,7 +4,7 @@ Tags: live blog, ajax, live updates, blog
 Donate link: http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Requires at least: 4.3
 Tested up to: 5.3.2
-Stable tag: 1.4.1
+Stable tag: 1.4.2
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +24,9 @@ Live blogs are the essential tool for keeping readers up to date in any breaking
 3. The live blog in action inside of a post.
 
 == Changelog ==
+= 1.4.2 =
+- Fixed an issue with the "Add Update" button not showing.
+
 = 1.4.1 =
 - Fixed issue with `is_plugin_active` function not being called correctly.
 
