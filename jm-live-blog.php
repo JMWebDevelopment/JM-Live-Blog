@@ -314,7 +314,7 @@ function jm_live_blog_blocks_editor_scripts() {
 }
 
 function jm_live_blog_check_gutenberg() {
-	if ( in_array( 'gutenberg/gutenberg.php', get_option( 'active_plugins', array() ) ) || version_compare( get_bloginfo( 'version' ), '4.9', '>' ) ) {
+	if ( version_compare( get_bloginfo( 'version' ), '4.9', '>' ) ) {
 		register_block_type( 'jm-live-blog/jm-live-blog-block', array(
 			'render_callback' => 'rendered_jm_live_blog',
 		) );
@@ -351,8 +351,8 @@ function rendered_jm_live_blog( $attributes ) {
 	$html .= '<span id="jm-live-blog-new-updates"' . $color . '>' . __( 'New Updates', 'jm-live-blog' ) . '</span>';
 	$html .= '<section class="jm-live-blog-section">';
 	$updates = get_post_meta( get_the_ID(), 'live_blog_updates', true );
-	$num_update = count ( $updates );
 	if ( $updates ) {
+		$num_update = count ( $updates );
 		foreach ( $updates as $update ) {
 			$content = apply_filters( 'the_content', $update[ 'live_blog_updates_content' ] );
 			$html .= '<div id="' . $num_update . '" class="jm-live-blog-update clearfix">';
