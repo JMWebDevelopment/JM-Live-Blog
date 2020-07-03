@@ -3,7 +3,7 @@
 Plugin Name: JM Live Blog
 Plugin URI:  http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Description: Live blogs are the essential tool for keeping readers up to date in any breaking news situation or sporting event. Using the power of AJAX, JM Live Blog allows you to add a live blog to any post with a simple shortcode to keep your readers in the know.
-Version:     1.4
+Version:     1.4.2
 Author:      Jacob Martella
 Author URI:  http://www.jacobmartella.com
 License:     GPL3
@@ -314,19 +314,20 @@ function jm_live_blog_blocks_editor_scripts() {
 }
 
 function jm_live_blog_check_gutenberg() {
-	if ( is_plugin_active( 'gutenberg/gutenberg.php' ) || version_compare( get_bloginfo( 'version' ), '4.9', '>' ) ) {
-		add_action( 'enqueue_block_editor_assets', 'jm_live_blog_blocks_editor_scripts' );
+	if ( version_compare( get_bloginfo( 'version' ), '4.9', '>' ) ) {
 		register_block_type( 'jm-live-blog/jm-live-blog-block', array(
 			'render_callback' => 'rendered_jm_live_blog',
 		) );
 	}
 }
-add_action( 'admin_init', 'jm_live_blog_check_gutenberg' );
+add_action( 'plugins_loaded', 'jm_live_blog_check_gutenberg' );
+
+add_action( 'enqueue_block_editor_assets', 'jm_live_blog_blocks_editor_scripts' );
 
 function rendered_jm_live_blog( $attributes ) {
 	$html = '';
 
-	if ( $attributes[ 'jm_live_blog_color_scheme' ] && 'dark' === $attributes[ 'jm_live_blog_color_scheme' ] ) {
+	if ( isset( $attributes[ 'jm_live_blog_color_scheme' ] ) && 'dark' === $attributes[ 'jm_live_blog_color_scheme' ] ) {
 		$style = 'dark';
 	} else {
 		$style = '';
@@ -350,8 +351,8 @@ function rendered_jm_live_blog( $attributes ) {
 	$html .= '<span id="jm-live-blog-new-updates"' . $color . '>' . __( 'New Updates', 'jm-live-blog' ) . '</span>';
 	$html .= '<section class="jm-live-blog-section">';
 	$updates = get_post_meta( get_the_ID(), 'live_blog_updates', true );
-	$num_update = count ( $updates );
 	if ( $updates ) {
+		$num_update = count ( $updates );
 		foreach ( $updates as $update ) {
 			$content = apply_filters( 'the_content', $update[ 'live_blog_updates_content' ] );
 			$html .= '<div id="' . $num_update . '" class="jm-live-blog-update clearfix">';
