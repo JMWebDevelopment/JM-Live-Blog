@@ -1,38 +1,78 @@
 # Changelog
 
-## 1.4.2
-- Fixed an issue with the "Add Update" button not showing.
+All of the changes for the JM Client Manager are stored here.
 
-## 1.4.1
-- Fixed issue with `is_plugin_active` function not being called correctly.
+## [1.7.0] - 2020-09-15
 
-## 1.4
-- Added the JM Live Blog Gutenberg block.
-- Tested with WordPress 5.3.
+### Added
+- Added Google Ads tab to Client Manager analytics page.
 
-## 1.3.2
-- Fixed: Issue with submenu items in the admin menu not showing on hover.
-- Tested with WordPress 4.9.
+## [1.6.0] - 2020-08-15
 
-## 1.3
-- Added: Support to show live blog on pages as well as posts.
-- Added: Widget to show live blog in the sidebar of posts if desired.
+### Added
+- Added changes to accomodate the community subsite.
 
-## 1.2
-- Fixed: Issue with posts being duplicated when hitting "New Updates" button.
-- Fixed: Titles with double quotes not showing up correctly.
-- Fixed: Issue with first post not being loaded correctly.
-- Fixed: Errors showing when all updates are deleted.
-- Tested with WordPress 4.8.
+## [1.5.0] - 2020-07-30
 
-## 1.1
-- Added: Ability to customize the color of the "New Updates" alerts banner.
-- Tested with WordPress 4.7.
+### Added
+- Added responsive styling for Google Data Studio reports.
 
-# 1.0.1
-- Fixed: Issue with the latest two updates having the same content after saving without adding a new field.
-- Fixed: Issue with paragraph breaks not showing.
-- Fixed: Issue with oembeds not showing as they should.
+## [1.4.1] - 2020-07-15
 
-## 1.0
-- Initial Release
+### Fixed
+- Updated the id for the Freelancing form to match the live website.
+
+## [1.4.0] - 2020-07-15
+
+### Added
+- Added in a calendar dashboard widget.
+- Added in a financials dashboard widget.
+- Added in a tasks dashboard widget.
+- Added in a analytics dashboard widget.
+
+## [1.3.0] - 2020-06-30
+
+### Added
+- Added in ability to track expenses inside the client manager plugin.
+- Added a back button for the tasks section.
+
+### Fixed
+- Visual testing on local and staging.
+
+## [1.2.0] - 2020-06-15
+
+### Added
+- Added new reports for Analytics, Search Console and YouTube.
+
+### Fixed
+- Issue with task comments being assigned to the first task instead of their respective task.
+- Made the tasks page three columns on wide screens.
+
+## [1.1.1] - 2020-05-30
+
+### Fixed
+- Updated the ids for the Gravity Forms to match the live website.
+
+## [1.1.0] - 2020-05-30
+
+### Added
+- Added in an options page.
+- Added in a page to show different analytics from Google Analytics, Search Console and YouTube.
+- Added in support for events.
+
+### Fixed
+- Fixed PHP errors on the clients and contacts pages.
+
+## [1.0.1] - 2020-05-17
+
+### Fixed
+- Fixed issue with not being able to view a single task.
+- Fixed issue with not being able to view a single invoice.
+- Fixed issue with amount doubling when updating an invoice.
+- Fixed issue with invoice paid date not showing up.
+- Fixed issue with invoice items check marks not showing up.
+
+## [1.0.0] - 2020-05-17
+
+### Added
+- Add in the first version of the plugin.
