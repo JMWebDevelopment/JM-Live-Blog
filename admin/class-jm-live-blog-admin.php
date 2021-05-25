@@ -72,7 +72,7 @@ class JM_Live_Blog_Admin {
 		}
 	}
 
-	public function add_meta_boxes() {
+	public function add_meta_box() {
 		add_meta_box( 'live-blog-updates-meta', __( 'Live Blog Updates', 'jm-live-blog' ), [ $this, 'create_meta_box' ], array( 'post', 'page' ), 'normal', 'default' );
 	}
 
@@ -305,7 +305,7 @@ class JM_Live_Blog_Admin {
 	 *
 	 * @since 2.0.0
 	 */
-	public function story_lines_buttons() {
+	public function jm_Live_blog_buttons() {
 		add_filter( 'mce_external_plugins', [ $this, 'add_buttons' ] );
 		add_filter( 'mce_buttons', [ $this, 'register_buttons' ] );
 	}

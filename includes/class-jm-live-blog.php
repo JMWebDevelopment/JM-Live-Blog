@@ -125,6 +125,9 @@ class JM_Live_Blog {
 		$admin = new JM_Live_Blog_Admin( $this->get_version() );
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_init', $admin, 'add_meta_box' );
+		$this->loader->add_action( 'save_post', $admin, 'save_meta_box' );
+		$this->loader->add_action( 'init', $admin, 'jm_Live_blog_buttons' );
 	}
 
 	/**
@@ -134,6 +137,12 @@ class JM_Live_Blog {
 	 */
 	private function define_public_hooks() {
 		$public = new JM_Live_Blog_Public( $this->get_version() );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'enqueue_styles' );
+		$this->loader->add_action( 'wp_enqueue_scripts', $public, 'enqueue_scripts' );
+		$this->loader->add_action( 'init', $public, 'register_shortcode' );
+		$this->loader->add_action( 'widgets_init', $public, 'register_widget' );
+		$this->loader->add_action( 'wp_ajax_nopriv_jm_live_blog_ajax', $public, 'jm_live_blog_ajax' );
+		$this->loader->add_action( 'wp_ajax_jm_live_blog_ajax', $public, 'jm_live_blog_ajax' );
 	}
 
 	/**
