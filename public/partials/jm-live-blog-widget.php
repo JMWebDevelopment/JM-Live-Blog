@@ -12,21 +12,20 @@
  */
 
 /**
- * jm-live-blog-widget.php
+ * Jm-live-blog-widget.php
  *
  * Creates the widget to show the live blog in the sidebar of a single post
  *
  * @author Jacob Martella
  * @package JM Live Blog
- * @version 1.4
- * @since 1.3
+ * @version 2.0.0
  */
 class JM_Live_Blog_Widget extends WP_Widget {
 
 	/**
 	 * JM_Live_Blog_Widget constructor.
 	 *
-	 * @since 1.0
+	 * @since 2.0.0
 	 */
 	public function __construct() {
 		parent::__construct(
@@ -42,11 +41,10 @@ class JM_Live_Blog_Widget extends WP_Widget {
 	/**
 	 * Outputs the HTML of the widget
 	 *
-	 * @param array $args
+	 * @since 2.0.0
 	 *
-	 * @param array $instance
-	 *
-	 * @since 1.3
+	 * @param array $args          The arguments for the widget.
+	 * @param array $instance      The instance for the widget.
 	 */
 	public function widget( $args, $instance ) {
 		extract( $args );

@@ -72,10 +72,20 @@ class JM_Live_Blog_Admin {
 		}
 	}
 
+	/**
+	 * Adds the meta box for the live blog.
+	 *
+	 * @since 2.0.0
+	 */
 	public function add_meta_box() {
 		add_meta_box( 'live-blog-updates-meta', __( 'Live Blog Updates', 'jm-live-blog' ), [ $this, 'create_meta_box' ], array( 'post', 'page' ), 'normal', 'default' );
 	}
 
+	/**
+	 * Creates the meta box for the live blog.
+	 *
+	 * @since 2.0.0
+	 */
 	public function create_meta_box() {
 		global $post;
 		global $current_screen;
@@ -213,7 +223,14 @@ class JM_Live_Blog_Admin {
 		echo '</div>';
 	}
 
-	public function save_meta_box() {
+	/**
+	 * Saves the meta box data for the live blog.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int $post_id      The id of the post.
+	 */
+	public function save_meta_box( $post_id ) {
 		$color_array['light'] = 'Light';
 		$color_array['dark']  = 'Dark';
 		if ( ! isset( $_POST['live_blog_updates_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['live_blog_updates_meta_box_nonce'], 'live_blog_updates_meta_box_nonce' ) ) {
@@ -348,6 +365,115 @@ class JM_Live_Blog_Admin {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Loads the block editor scripts and styles.
+	 *
+	 * @since 2.0.0
+	 */
+	public function blocks_editor_scripts() {
+		$block_path = '../public/js/editor.blocks.js';
+
+		wp_enqueue_style(
+			'jm-live-blog-blocks-editor-css',
+			plugin_dir_url( __FILE__ ) . 'css/blocks.editor.css'
+		);
+
+		wp_enqueue_script(
+			'jm-live-blog-blocks-js',
+			plugins_url( $block_path, __FILE__ ),
+			[ 'wp-i18n', 'wp-element', 'wp-blocks', 'wp-components', 'wp-api', 'wp-editor' ],
+			filemtime( plugin_dir_path(__FILE__) . $block_path )
+		);
+
+		wp_localize_script(
+			'jm-live-blog-js',
+			'jm_live_blog_globals',
+			[
+				'rest_url'  => esc_url( rest_url() ),
+				'nonce'     => wp_create_nonce( 'wp_rest' ),
+			]
+		);
+	}
+
+	/**
+	 * Checks to make sure Gutenberg is active or the WP version is greater than 5.0.
+	 *
+	 * @since 2.0.0
+	 */
+	public function check_gutenberg() {
+		if ( ! function_exists( 'register_block_type' ) ) {
+			// Block editor is not available.
+			return;
+		}
+
+		add_action( 'enqueue_block_editor_assets', [ $this, 'blocks_editor_scripts' ] );
+		register_block_type(
+			'jm-live-blog/jm-live-blog-block',
+			[
+				'render_callback' => [ $this, 'rendered_jm_live_blog' ],
+			]
+		);
+	}
+
+	/**
+	 * Renders the JM Live Blog block.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $attributes      The attributes of the block.
+	 * @return string                The HTML of the block.
+	 */
+	public function rendered_jm_live_blog( $attributes ) {
+		$html = '';
+
+		if ( isset( $attributes['jm_live_blog_color_scheme'] ) && 'dark' === $attributes[ 'jm_live_blog_color_scheme' ] ) {
+			$style = 'dark';
+		} else {
+			$style = '';
+		}
+
+		if ( isset( $attributes['jm_live_blog_update_color'] ) && '' !== $attributes['jm_live_blog_update_color'] ) {
+			$color = 'style="background-color:' . $attributes['jm_live_blog_update_color'] . ';"';
+		} else {
+			$color = '';
+		}
+
+		$html .= '<div id="jm-live-blog" class="jm-live-blog-outer ' . $style . '">';
+		$html .= '<div class="jm-live-blog-inner">';
+		if ( isset( $attributes['jm_live_blog_title'] ) && '' !== $attributes['jm_live_blog_title'] ) {
+			$html .= '<h3 class="jm-live-blog-title">' . $attributes['jm_live_blog_title'] . '</h3>';
+		}
+		if ( isset( $attributes['jm_live_blog_description'] ) && '' !== $attributes['jm_live_blog_description'] ) {
+			$html .= '<p class="jm-live-blog-description">' . $attributes['jm_live_blog_description'] . '</p>';
+		}
+		$html   .= '<div class="jm-live-blog-section-outer">';
+		$html   .= '<span id="jm-live-blog-new-updates"' . $color . '>' . esc_html__( 'New Updates', 'jm-live-blog' ) . '</span>';
+		$html   .= '<section class="jm-live-blog-section">';
+		$updates = get_post_meta( get_the_ID(), 'live_blog_updates', true );
+		if ( $updates ) {
+			$num_update = count( $updates );
+			foreach ( $updates as $update ) {
+				$content = apply_filters( 'the_content', $update['live_blog_updates_content'] );
+				$html   .= '<div id="' . $num_update . '" class="jm-live-blog-update clearfix">';
+				$html   .= '<div class="live-blog-left">';
+				$html   .= '<h5 class="live-blog-time">' . $update['live_blog_updates_time'] . '</h5>';
+				$html   .= '</div>';
+				$html   .= '<div class="live-blog-right">';
+				$html   .= '<h4 class="live-blog-title">' . $update['live_blog_updates_title'] . '</h4>';
+				$html   .= '<div class="live-blog-content">' . $content . '</div>';
+				$html   .= '</div>';
+				$html   .= '</div>';
+				$num_update--;
+			}
+		}
+		$html .= '</section>';
+		$html .= '</div>';
+		$html .= '</div>';
+		$html .= '</div>';
+
+		return $html;
 	}
 
 }

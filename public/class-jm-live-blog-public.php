@@ -70,10 +70,23 @@ class JM_Live_Blog_Public {
 		);
 	}
 
+	/**
+	 * Registers the live blog shortcode.
+	 *
+	 * @since 2.0.0
+	 */
 	public function register_shortcode() {
 		add_shortcode( 'jm-live-blog', [ $this, 'create_shortcode' ] );
 	}
 
+	/**
+	 * Creates the shortcode for the live blog.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param array $atts      The attributes for the shortcode.
+	 * @return string          The HTML for the live blog.
+	 */
 	public function create_shortcode( $atts ) {
 		extract(
 			shortcode_atts(
@@ -135,6 +148,11 @@ class JM_Live_Blog_Public {
 		return $html;
 	}
 
+	/**
+	 * Echos out the new updates for the live blog.
+	 *
+	 * @since 2.0.0
+	 */
 	public function jm_live_blog_ajax() {
 		check_ajax_referer( 'jm-live-blog', 'nonce' );
 		$post_id    = $_POST['post_id'];
@@ -167,7 +185,7 @@ class JM_Live_Blog_Public {
 	}
 
 	/**
-	 * Loads and registers the read more about widget.
+	 * Loads and registers the live blog widget.
 	 *
 	 * @since 2.0.0
 	 */

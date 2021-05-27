@@ -113,7 +113,7 @@
   },
   "babel": {
     "presets": [
-      "@babel/env"
+      "@wordpress/default"
     ]
   },
   "eslintConfig": {

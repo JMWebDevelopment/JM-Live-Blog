@@ -89,7 +89,7 @@ class JM_Live_Blog {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jm-live-blog-database-updates.php';
 
 		require_once plugin_dir_path( __FILE__ ) . 'class-jm-live-blog-loader.php';
-		$this->loader = new Starter_Plugin_Loader();
+		$this->loader = new JM_Live_Blog_Loader();
 
 	}
 
@@ -128,6 +128,7 @@ class JM_Live_Blog {
 		$this->loader->add_action( 'admin_init', $admin, 'add_meta_box' );
 		$this->loader->add_action( 'save_post', $admin, 'save_meta_box' );
 		$this->loader->add_action( 'init', $admin, 'jm_Live_blog_buttons' );
+		$this->loader->add_action( 'init', $admin, 'check_gutenberg' );
 	}
 
 	/**
