@@ -1,0 +1,35 @@
+@import "_custom-properties.css";
+@import "_custom-mixins.css";
+
+.jm-live-blog-fields {
+	width: 100%;
+	border-top: 1px solid #333;
+	padding-top: 20px;
+	margin-top: 20px;
+}
+
+.jm-live-blog-fields .jm_live_blog_input {
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.jm-live-blog-field {
+	width: 100%;
+}
+
+.jm-live-blog-field tr td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.jm-live-blog-field tr td:first-child {
+	width: 25%;
+}
+
+.jm-live-blog-field tr td:nth-child(2) {
+	width: 15%;
+}
+
+.jm-live-blog-field tr td input[type="text"] {
+	width: 100%;
+}
