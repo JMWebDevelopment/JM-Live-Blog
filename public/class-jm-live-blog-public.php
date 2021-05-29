@@ -60,7 +60,7 @@ class JM_Live_Blog_Public {
 	public function enqueue_scripts() {
 		wp_enqueue_script( 'jm-live-blog-public-script', plugin_dir_url( __FILE__ ) . 'js/jm-live-blog.min.js', [ 'jquery' ], $this->version, 'all' );
 		wp_localize_script(
-			'jm-live-blog',
+			'jm-live-blog-public-script',
 			'jmliveblog',
 			[
 				'post_id' => get_the_ID(),
