@@ -13,7 +13,7 @@ import pump from 'pump';
 import {paths, gulpPlugins, PHPCSOptions} from './constants';
 import {getThemeConfig, backslashToForwardSlash} from './utils';
 import {reload} from './browserSync';
-import images from './images';
+import adminImages from './adminImages';
 import adminScripts from './adminScripts';
 import adminStyles from './adminStyles';
 import publicScripts from './publicScripts';
@@ -53,7 +53,7 @@ export default function watch() {
 
 	gulpWatch(backslashToForwardSlash(paths.adminScripts.src[0]), series(adminScripts, reload));
 
-	gulpWatch(backslashToForwardSlash(paths.images.src), series(images, reload));
+	gulpWatch(backslashToForwardSlash(paths.images.src), series(adminImages, reload));
 
 	gulpWatch(backslashToForwardSlash(paths.webfonts.src), series(webfonts, reload));
 }

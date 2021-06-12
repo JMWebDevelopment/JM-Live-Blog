@@ -335,7 +335,7 @@ class JM_Live_Blog_Admin {
 	 * @param array $plugin_array      The incoming array of plugins.
 	 */
 	public function add_buttons( $plugin_array ) {
-		$plugin_array['jm_live_blog'] = plugin_dir_url( __FILE__ ) . 'js/jm-breaking-news-admin-button.min.js';
+		$plugin_array['jm_live_blog'] = plugin_dir_url( __FILE__ ) . 'js/jm-live-blog-button.min.js';
 		return $plugin_array;
 	}
 
