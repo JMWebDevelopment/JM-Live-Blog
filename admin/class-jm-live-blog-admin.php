@@ -107,6 +107,8 @@ class JM_Live_Blog_Admin {
 
 		echo '<div id="jm-live-blog-repeatable-fieldset-one" width="100%">';
 
+		wp_editor( '', 'jm-test-editor', array( 'textarea_name' => 'jm_test_area', 'default_editor' => 'quicktags', 'tinymce' => false ) );
+
 		if ( ( ! method_exists( $current_screen, 'is_block_editor' ) && ! $current_screen->is_block_editor() ) || ( function_exists( 'is_gutenberg_page' )) && ! is_gutenberg_page() ) {
 			echo '<table class="jm-live-blog-field">';
 			echo '<tr>';
@@ -159,7 +161,7 @@ class JM_Live_Blog_Admin {
 		echo '<tr>';
 		echo '<td><label for="live_blog_updates_content">' . esc_html__( 'Update Content', 'jm-live-blog' ) . '</label></td>';
 		echo '<td>';
-		wp_editor( '', 'live_blog_updates_content_hidden', $settings = array( 'textarea_name' => 'live_blog_updates_content[]' ) );
+		wp_editor( '', 'live_blog_updates_content_hidden', $settings = array( 'textarea_name' => 'live_blog_updates_content[]', 'default_editor' => 'quicktags', 'tinymce' => false ) );
 		echo '</td>';
 		echo '</tr>';
 
@@ -189,7 +191,7 @@ class JM_Live_Blog_Admin {
 				echo '<td><label for="live_blog_updates_content">' . esc_html__( 'Update Content', 'jm-live-blog' ) . '</label></td>';
 				$update_content = $update['live_blog_updates_content'];
 				echo '<td>';
-				wp_editor( htmlspecialchars_decode( $update_content ), 'live_blog_updates_content_' . $num, $settings = array( 'textarea_name'=>'live_blog_updates_content[]' ) );
+				wp_editor( htmlspecialchars_decode( $update_content ), 'live_blog_updates_content_' . $num, $settings = array( 'textarea_name'=>'live_blog_updates_content[]', 'default_editor' => 'quicktags', 'tinymce' => false ) );
 				echo '</td>';
 				echo '</p>';
 
@@ -212,7 +214,7 @@ class JM_Live_Blog_Admin {
 			echo '<tr>';
 			echo '<td><label for="live_blog_updates_content">' . esc_html__( 'Update Content', 'jm-live-blog' ) . '</label></td>';
 			echo '<td>';
-			wp_editor( '', 'live_blog_updates_content', $settings = array( 'textarea_name'=>'live_blog_updates_content[]' ) );
+			wp_editor( '', 'live_blog_updates_content', $settings = array( 'textarea_name'=>'live_blog_updates_content[]', 'default_editor' => 'quicktags', 'tinymce' => false ) );
 			echo '</td>';
 			echo '</tr>';
 
