@@ -5,7 +5,7 @@ Donate link: http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-bl
 Requires at least: 4.3
 Tested up to: 5.7.2
 Requires PHP: 7.0
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

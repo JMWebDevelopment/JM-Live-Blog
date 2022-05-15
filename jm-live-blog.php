@@ -3,7 +3,7 @@
  * Plugin Name:       JM Live Blog
  * Plugin URI:        http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
  * Description:       Live blogs are the essential tool for keeping readers up to date in any breaking news situation or sporting event. Using the power of AJAX, JM Live Blog allows you to add a live blog to any post with a simple shortcode to keep your readers in the know.
- * Version:           2.0
+ * Version:           2.0.1
  * Author:            Jacob Martella Web Development
  * Author URI:        https://jacobmartella.com
  * Text Domain:       jm-live-blog

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+- Fixed an issue with not being able to add text for the updates. This does remove the "visual" tab from the editor for the time being.
+- Fixed an issue with not loading the shortcode button in the TinyMCE editor.
+
 ## 2.0
 - Refactor the entire plugin to use an object-oriented programming paradigm.
 - Upped the lowest PHP version supported to 7.0.
