@@ -65,7 +65,7 @@ class JM_Live_Blog {
 	public function __construct() {
 
 		$this->plugin_slug = 'jm-live-blog';
-		$this->version     = '2.0';
+		$this->version     = '2.0.1';
 
 		$this->load_dependencies();
 		$this->set_locale();
