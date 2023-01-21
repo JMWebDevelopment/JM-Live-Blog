@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "jm-live-blog/jm-live-blog-block",
+	"version": "2.1",
+	"title": "JM Live Blog",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Displays a live blog for the post or page",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "jm-live-blog",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
