@@ -87,7 +87,7 @@ class JM_Live_Blog {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jm-live-blog-setup.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jm-live-blog-admin.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-jm-live-blog-public.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'blocks/class-jm-breaking-news-blocks.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'blocks/class-jm-live-blog-blocks.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jm-live-blog-database-updates.php';
 
 		require_once plugin_dir_path( __FILE__ ) . 'class-jm-live-blog-loader.php';
@@ -130,7 +130,7 @@ class JM_Live_Blog {
 		$this->loader->add_action( 'admin_init', $admin, 'add_meta_box' );
 		$this->loader->add_action( 'save_post', $admin, 'save_meta_box' );
 		$this->loader->add_action( 'init', $admin, 'jm_Live_blog_buttons' );
-		$this->loader->add_action( 'init', $admin, 'check_gutenberg' );
+		//$this->loader->add_action( 'init', $admin, 'check_gutenberg' );
 	}
 
 	/**
