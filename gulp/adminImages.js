@@ -15,11 +15,11 @@ import {paths, gulpPlugins} from './constants';
 /**
  * Optimize images.
  */
-export default function images(done) {
+export default function adminImages(done) {
     pump([
-        src(paths.images.src),
-        gulpPlugins.newer(paths.images.dest),
+        src(paths.adminImages.src),
+        gulpPlugins.newer(paths.adminImages.dest),
         gulpPlugins.imagemin(),
-        dest(paths.images.dest),
+        dest(paths.adminImages.dest),
     ], done);
 }

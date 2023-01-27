@@ -5,7 +5,7 @@ Donate link: http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-bl
 Requires at least: 4.3
 Tested up to: 5.7.2
 Requires PHP: 7.0
-Stable tag: 2.0
+Stable tag: 2.0.1
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,6 +25,10 @@ Live blogs are the essential tool for keeping readers up to date in any breaking
 3. The live blog in action inside of a post.
 
 == Changelog ==
+= 2.0.1 =
+- Fixed an issue with not being able to add text for the updates. This does remove the "visual" tab from the editor for the time being.
+- Fixed an issue with not loading the shortcode button in the TinyMCE editor.
+
 = 2.0 =
 - Refactor the entire plugin to use an object-oriented programming paradigm.
 - Upped the lowest PHP version supported to 7.0.

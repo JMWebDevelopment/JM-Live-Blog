@@ -7,7 +7,7 @@ import {parallel, series} from 'gulp';
 
 // Internal dependencies
 import generateCert from './gulp/generateCert';
-import images from './gulp/images';
+import adminImages from './gulp/adminImages';
 import webfonts from "./gulp/webfonts";
 import php from './gulp/php';
 import {serve} from './gulp/browserSync';
@@ -26,7 +26,7 @@ import { cleanAdminCSS, cleanAdminJS, cleanPublicCSS, cleanPublicJS } from './gu
  * Map out the sequence of events on first load and make it the default task
  */
 export const firstRun = series(
-	cleanAdminCSS, cleanAdminJS, cleanPublicCSS, cleanPublicJS, parallel( php, images, webfonts, publicScripts, publicStyles, adminScripts, adminStyles ), serve, watch
+	cleanAdminCSS, cleanAdminJS, cleanPublicCSS, cleanPublicJS, parallel( php, adminImages, webfonts, publicScripts, publicStyles, adminScripts, adminStyles ), serve, watch
 );
 
 export default firstRun;
@@ -35,17 +35,17 @@ export default firstRun;
  * Build theme for development without BrowserSync or watching
  */
 export const buildDev = parallel(
-	php, images, publicScripts, publicStyles, adminScripts, adminStyles
+	php, adminImages, publicScripts, publicStyles, adminScripts, adminStyles
 );
 
 /**
  * Export theme for distribution.
  */
 export const bundleTheme = series(
-	prodPrep, parallel( php, publicScripts, publicStyles, adminScripts, adminStyles, images, webfonts ), translate, prodStringReplace, prodCompress
+	prodPrep, parallel( php, publicScripts, publicStyles, adminScripts, adminStyles, adminImages, webfonts ), translate, prodStringReplace, prodCompress
 );
 
 /**
  * Export all imported functions as tasks
  */
-export { generateCert, images, webfonts, php, publicScripts, publicStyles, adminScripts, adminStyles, translate, watch, cleanAdminCSS, cleanAdminJS, cleanPublicCSS, cleanPublicJS };
+export { generateCert, adminImages, webfonts, php, publicScripts, publicStyles, adminScripts, adminStyles, translate, watch, cleanAdminCSS, cleanAdminJS, cleanPublicCSS, cleanPublicJS };
