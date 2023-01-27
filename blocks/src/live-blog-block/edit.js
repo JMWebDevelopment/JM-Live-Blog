@@ -81,7 +81,7 @@ export default function Edit( props ) {
 
 		</InspectorControls>,
 		<div { ...useBlockProps() }>
-			<div id="jm-live-blog" className={ [ jm_live_blog_color_scheme, ' jm-live-blog-outer' ] }>
+			<div id="jm-live-blog" className={ jm_live_blog_color_scheme + ' jm-live-blog-outer' }>
 				<div className="jm-live-blog-inner">
 					<h3 className="jm-live-blog-title">{ jm_live_blog_title }</h3>
 					<p className="jm-live-blog-description">{ jm_live_blog_description }</p>
