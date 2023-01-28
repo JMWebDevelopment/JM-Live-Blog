@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.1.0
+- Update the block to use the block.json file and other new features.
+
 ## 2.0.1
 - Fixed an issue with not being able to add text for the updates. This does remove the "visual" tab from the editor for the time being.
 - Fixed an issue with not loading the shortcode button in the TinyMCE editor.
