@@ -65,13 +65,14 @@ class JM_Live_Blog {
 	public function __construct() {
 
 		$this->plugin_slug = 'jm-live-blog';
-		$this->version     = '2.0.1';
+		$this->version     = '2.1.0';
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_setup_hooks();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_block_hooks();
 
 	}
 
@@ -86,6 +87,7 @@ class JM_Live_Blog {
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jm-live-blog-setup.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jm-live-blog-admin.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-jm-live-blog-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'blocks/class-jm-live-blog-blocks.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jm-live-blog-database-updates.php';
 
 		require_once plugin_dir_path( __FILE__ ) . 'class-jm-live-blog-loader.php';
@@ -128,7 +130,7 @@ class JM_Live_Blog {
 		$this->loader->add_action( 'admin_init', $admin, 'add_meta_box' );
 		$this->loader->add_action( 'save_post', $admin, 'save_meta_box' );
 		$this->loader->add_action( 'init', $admin, 'jm_Live_blog_buttons' );
-		$this->loader->add_action( 'init', $admin, 'check_gutenberg' );
+		//$this->loader->add_action( 'init', $admin, 'check_gutenberg' );
 	}
 
 	/**
@@ -144,6 +146,16 @@ class JM_Live_Blog {
 		$this->loader->add_action( 'widgets_init', $public, 'register_widget' );
 		$this->loader->add_action( 'wp_ajax_nopriv_jm_live_blog_ajax', $public, 'jm_live_blog_ajax' );
 		$this->loader->add_action( 'wp_ajax_jm_live_blog_ajax', $public, 'jm_live_blog_ajax' );
+	}
+
+	/**
+	 * Runs all of the block hooks for the plugin.
+	 *
+	 * @since 2.0.0
+	 */
+	private function define_block_hooks() {
+		$blocks = new JM_Live_Blog_Blocks( $this->get_version() );
+		$this->loader->add_action( 'init', $blocks, 'create_blocks' );
 	}
 
 	/**

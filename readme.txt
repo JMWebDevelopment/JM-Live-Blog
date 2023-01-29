@@ -3,9 +3,9 @@ Contributors: ArenaPigskin
 Tags: live blog, ajax, live updates, blog
 Donate link: http://www.jacobmartella.com/wordpress/wordpress-plugins/jm-live-blog
 Requires at least: 4.3
-Tested up to: 5.7.2
+Tested up to: 6.1.1
 Requires PHP: 7.0
-Stable tag: 2.0.1
+Stable tag: 2.1.0
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,6 +25,9 @@ Live blogs are the essential tool for keeping readers up to date in any breaking
 3. The live blog in action inside of a post.
 
 == Changelog ==
+= 2.1 =
+- Update the block to use the block.json file and other new features.
+
 = 2.0.1 =
 - Fixed an issue with not being able to add text for the updates. This does remove the "visual" tab from the editor for the time being.
 - Fixed an issue with not loading the shortcode button in the TinyMCE editor.
